@@ -1,0 +1,16 @@
+{
+  "address": "Avenue Kheireddine Pacha, Tunis 1080",
+  "name": "A louer",
+  "price": 550,
+  "currency": "DT",
+  "date_published": "20/05/2017T10:51",
+  "customer_id": 1,
+  "description": "Un jolie studio composé de deux pièces avec cuisine et salle de bain, chauffage central et climatiseurs, disponible le 1er Juin",
+  "country_id": 1,
+  "city_id": 1,
+  "locality_id": 1,
+  "state": "valid",
+  "expiry_date": "20/06/2017T10:51",
+  "lat": "36.8252821",
+  "long": ",10.1950485"
+}

@@ -1,0 +1,94 @@
+<form name="searchForm">
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label for="type">What are you looking for ?</label>
+      <select class="form-control" id="type" [(ngModel)]="search.type" name="country">
+        <option [ngValue]="1">Rent</option>
+        <option [ngValue]="2">Sale</option>
+      </select>
+    </div>
+    <div class="form-group col-sm-6">
+      <label for="item_type">Type</label>
+      <select class="form-control" id="item_type" [(ngModel)]="search.item_type" name="country" >
+        <option [ngValue]="1">House</option>
+        <option [ngValue]="2">Appartment</option>
+      </select>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 form-group">
+      <label for="countrySelect">Country</label>
+      <select class="form-control" id="countrySelect" [(ngModel)]="search.country_id" name="country" (ngModelChange)="loadCities($event)" >
+        <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+      </select>
+    </div>
+
+  <div class="col-sm-4 form-group">
+    <label for="citySelect">City</label>
+    <select class="form-control" id="citySelect" [(ngModel)]="currentCity" name="city">
+      <option *ngFor="let city of cities" [ngValue]="city._source">{{city._source.name}}</option>
+
+    </select>
+  </div>
+
+
+    <div class="col-sm-4 form-group">
+      <label for="localiteSelect">Localité</label>
+      <select class="form-control" id="localiteSelect" [(ngModel)]="currentLocality" name="localité">
+        <option *ngFor="let locality of currentCity.localities" [ngValue]="locality">{{locality.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 form-group">
+      <div class="form-group">
+        <label for="minprice">Maximum Price</label>
+        <input name="minrice" [(ngModel)]="search.minprice" type="text" class="form-control" id="minprice" aria-describedby="max price" placeholder="0$">
+        <small id="minriceSmall" class="form-text text-muted">Type keywords to make your search more specific.</small>
+      </div>
+    </div>
+    <div class="col-sm-6 form-group">
+      <div class="form-group">
+        <label for="maxprice">Maximum Price</label>
+        <input name="maxprice" [(ngModel)]="search.maxprice" type="text" class="form-control" id="maxprice" aria-describedby="max price" placeholder="100000$">
+        <small id="maxpriceSmall" class="form-text text-muted">Type keywords to make your search more specific.</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="keywords">Keywords</label>
+    <input name="keywords" [(ngModel)]="search.keywords" type="text" class="form-control" id="keywords" aria-describedby="keywords for seach" placeholder="Enter Keywords">
+    <small id="keywordsSmall" class="form-text text-muted">Type keywords to make your search more specific.</small>
+  </div>
+  <button type="button" class="btn btn-secondary col-sm-12">
+    <span class="glyphicon glyphicon-th-list"></span> More filters >>
+  </button>
+  <button  type="submit" class="btn btn-info col-sm-12"  (click)="getAds()">
+    <span class="glyphicon glyphicon-search"></span> Search
+  </button>
+</form>
+{{location.latitude}}
+<agm-map id="map_canvas" style="height: 400px; width: 100%" [latitude]="location.latitude" [longitude]="location.longitude" [usePanning]="true">
+  <agm-marker [latitude]="location.latitude" [longitude]="location.longitude" ></agm-marker>
+</agm-map>
+
+<div id="search results" [hidden]="ads.length == 0">
+  <h2>Results</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Price</th>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ad of ads">
+      <td>{{ad._source.price}}</td>
+      <td>{{ad._source.name}}</td>
+      <td>something else {{ad.name}}</td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
